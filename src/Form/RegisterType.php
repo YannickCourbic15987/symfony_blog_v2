@@ -4,17 +4,39 @@ namespace App\Form;
 
 use App\Entity\Users;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraint as Assert;
 
 class RegisterType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('username')
-            ->add('password')
-            ->add('email');
+            ->add('username', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control mb-4 w-50'
+                ]
+            ])
+            ->add('password', PasswordType::class, [
+                'attr' => [
+                    'class' => 'form-control mb-4 w-50'
+                ]
+            ])
+            ->add('email', EmailType::class, [
+                'attr' => [
+                    'class' => 'form-control mb-4 w-50'
+                ]
+            ])
+            ->add('submit', SubmitType::class, [
+                'attr' => [
+                    'class' => ' btn btn-primary text-white'
+                ]
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\UsersRepository;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 // use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UsersRepository::class)]
@@ -16,12 +17,17 @@ class Users
     private $id;
 
     #[ORM\Column(type: 'string', length: 100)]
-
+    #[Assert\Length(min: 2, max: 10)]
+    #[Assert\NotBlank()]
     private string $username;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank()]
+    #[Assert\Length(min: 7)]
     private string $password;
     #[ORM\Column(type: 'string', length: 200)]
+    #[Assert\NotBlank()]
+    #[Assert\Email]
     private string $email;
 
     #[ORM\Column(type: 'datetime')]
